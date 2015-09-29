@@ -1,2 +1,0 @@
-pushtest7.txt
-22
