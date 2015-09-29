@@ -84,6 +84,12 @@ class menuMod extends commonMod
         $this->list=model('menu')->admin_menu(20);
         $this->display();
     }
+	//统计系统  add by jameskid 2015.9.28
+    public function statistics() {
+        $this->list=model('menu')->admin_menu(20);
+        $this->display();
+    }
+	//
 
     public function error() {
         $this->success('很抱歉，暂时没有可显示的功能！');

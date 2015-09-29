@@ -36,10 +36,20 @@ class menuModel extends commonModel
                 ),
             5=>array(
                 'pid'=>20,
-                'name'=>'用户',
+                'name'=>'系统用户',
                 'url'=>__APP__.'/menu/user',
                 ),
-            );
+            6=>array(
+                'pid'=>60,  //　对应数据库admin_menu 表pid   add by jameskid 2015.9.38
+                'name'=>'统计系统',
+                'url'=>__APP__.'/menu/statistics',
+                ),
+            7=>array(
+                'pid'=>70,  //　对应数据库admin_menu 表pid   add by jameskid 2015.9.38
+                'name'=>'审核系统',
+                'url'=>__APP__.'/menu/check',
+                ),
+			);
         $user=model('user')->current_user();
         $menu_power=unserialize($user['menu_power']);
         
