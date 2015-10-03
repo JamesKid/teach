@@ -1,0 +1,76 @@
+<div class="page_function">
+  <div class="info">
+    <h3>会员管理</h3>
+    <small>使用以下功能对人员添加操作</small> </div>
+  <div class="exercise"> 
+   <a href="javascript:menuload('__URL__')">会员列表</a>
+   <?php if(model('user_group')->model_power('user','add')){ ?>
+   <a href="javascript:menuload('__URL__/add')">添加会员</a>
+   <?php } ?>
+   </div>
+</div>
+<div class="page_main">
+  <div class="page_table table_list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th width="10%"><center>ID</center></th>
+        <th width="20%">会员帐号</th>
+        <th width="20%">会员名称</th>
+		<th width="20%">ip地址</th>
+        <th width="10%">注册时间</th>
+        <th width="10%">最近登录时间</th>
+        <th width="10%">登录次数</th>
+        <th width="10%">状态</th>
+        <th width="20%"><center>操作</center></th>
+      </tr>
+      <!--foreach:{$list $vo}-->
+      <tr>
+        <td><center>{$vo.id}</center></td>
+        <td>{$vo.user}</td>
+        <td>{$vo.nicename}</td>
+        <td>{$vo.ip}</td>
+		<td>{$php(echo date('Y-m-d H:i:s',$vo['regtime']))}</td><!-- time format add by jameskid 2015.10.3-->
+		<td>{$php(echo date('Y-m-d H:i:s',$vo['logintime']))}</td><!-- time format add by jameskid 2015.10.3-->
+        <td>{$vo.loginnum}</td>
+        <td>
+        <!--if:{$vo['status']==1}-->
+        启用
+        <!--{else}-->
+        禁用
+        <!--{/if}-->
+        </td>
+        <td><center>
+        <?php if(model('user_group')->model_power('user','edit')){ ?>
+        <a href="__URL__/edit/id-{$vo.id}">设置状态</a>
+        <?php } ?>
+        <?php if(model('user_group')->model_power('user','edit')){ ?>
+        &nbsp;&nbsp;<a href="__URL__/edit_info/id-{$vo.id}">修改密码</a>
+        <?php } ?>
+        <?php if(model('user_group')->model_power('user','del')){ ?>
+        &nbsp;&nbsp;<a href="javascript:void(0);" onclick="del('{$vo.id}',this)">删除</a>
+        <?php } ?>
+        </center></td>
+      </tr>
+      <!--{/foreach}-->
+    </table>
+  </div>
+</div>
+
+<div class="page_tool">
+  <div class="page"></div>
+</div>
+<script>
+//删除
+function del(id,obj) {
+	var obj;
+	ajaxpost({
+		name:'确定要删除此管理员吗？',
+		url:"__URL__/del",
+		data:{id: id},
+		tip:1,
+		success:function(){
+			$(obj).parent().parent().parent().remove();
+		}
+	});
+}
+</script>
