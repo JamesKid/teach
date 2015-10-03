@@ -83,6 +83,7 @@ class commonMod
         $this->assign('js', $this->load_js());
         $this->assign('css', $this->load_css());
         $this->assign('user', model('user')->current_user());
+		//print_r($this->assign);;
         $this->view()->assign( $this->_data );
         return $this->view()->display($tpl, $return, $is_tpl,$diy_tpl);
     }

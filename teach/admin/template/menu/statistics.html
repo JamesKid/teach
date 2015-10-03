@@ -1,44 +1,21 @@
-<! -- add by jameskid 2015.9.28 -->
 <div class="title"><a href="javascript:void(0)">统计系统</a></div>
-<ul id="tree" class="ztree load">
-	
-</ul>
-<!--hook-->
+    <ul class="load menu">
+    	<!--foreach:{$list $vo}-->
+      <li><a href="__APP__/{$vo.module}">{$vo.name}</a></li>
+      <!--{/foreach}-->
+      <!--hook-->
+	  <?php module('common')->plus_hook('menu','statistics_list_tpl');  ?>
+	  <!--hook end-->
+    </ul>
+    <!--hook-->
     <?php module('common')->plus_hook('menu','statistics_tpl');  ?>
-<!--hook end-->
+    <!--hook end-->
+    
 <script>
-var zTree;
-var setting = {
-    view: {
-        showLine: true,
-        selectedMulti: false
-    },
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "cid",
-            pIdKey: "pid",
-            rootPId: ""
-        }
-    },
-	callback: {
-		onClick: onClick
-	}
-};
-var zNodes = [
- <?php echo $class_tree; ?>
-];
-
-function onClick(e,treeId, treeNode) {
-	var zTree = $.fn.zTree.getZTreeObj("tree");
-	if(treeNode.url==null){
-	zTree.expandNode(treeNode);
-	}
-	
+url=$(".load li:first a").attr("href");
+if(!url||url=='#'){
+	ajaxload('__APP__/menu/error');
+}else{
+	ajaxload(url);
 }
-$(document).ready(function() {
-    var t = $("#tree");
-    t = $.fn.zTree.init(t, setting, zNodes);
-    ajaxload('__APP__/statistics_index');
-});
-</script>    
+</script>

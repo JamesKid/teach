@@ -78,18 +78,29 @@ class menuMod extends commonMod
         $this->assign('menu',$menu);
         $this->display();
     }
-
     //用户管理
     public function user() {
         $this->list=model('menu')->admin_menu(20);
         $this->display();
     }
+
 	//统计系统  add by jameskid 2015.9.28
     public function statistics() {
-        $this->list=model('menu')->admin_menu(20);
+        $this->list=model('menu')->admin_menu(60);
+		//print_r($this->list);die; // 输出列表 admin_menu表父id为60的列
         $this->display();
     }
-	//
+    //审核系统 add by jameskid 2015.10.3
+    public function check() {
+        $this->list=model('menu')->admin_menu(70);
+		//print_r($this->list);die; // 输出列表 admin_menu表父id为60的列
+        $this->display();
+    }
+    //平台用户管理 add by jameskid 2015.10.3
+    public function ptuser() {
+        $this->list=model('menu')->admin_menu(80);
+        $this->display();
+    }
 
     public function error() {
         $this->success('很抱歉，暂时没有可显示的功能！');

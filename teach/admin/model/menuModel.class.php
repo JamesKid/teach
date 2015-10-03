@@ -49,6 +49,11 @@ class menuModel extends commonModel
                 'name'=>'审核系统',
                 'url'=>__APP__.'/menu/check',
                 ),
+            8=>array(
+                'pid'=>80,  //　对应数据库admin_menu 表pid   add by jameskid 2015.9.38
+                'name'=>'平台用户',
+                'url'=>__APP__.'/menu/ptuser',
+                ),
 			);
         $user=model('user')->current_user();
         $menu_power=unserialize($user['menu_power']);
