@@ -34,7 +34,8 @@ CREATE TABLE `duxcmst_ptuser` (
   `status` int(1) unsigned DEFAULT '1' COMMENT '使用状态 0删除 1:允许 2：未审核',
   `loginnum` int(10) DEFAULT '1' COMMENT '登录次数',
   `keep` int(1) NOT NULL DEFAULT '0',
-  `type` varchar(255) DEFAULT NULL COMMENT '类型 0: 未定义 1: 会员  2: 教师 3: 机构',
+  `type` varchar(255) DEFAULT '0' COMMENT '类型 0: 未定义 1: 会员  2: 教师 3: 机构',
+  `point` int(11) DEFAULT '0' COMMENT '积分',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='管理员信息表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -45,7 +46,7 @@ CREATE TABLE `duxcmst_ptuser` (
 
 LOCK TABLES `duxcmst_ptuser` WRITE;
 /*!40000 ALTER TABLE `duxcmst_ptuser` DISABLE KEYS */;
-INSERT INTO `duxcmst_ptuser` VALUES (1,1,'天杰1','21232f297a57a5a743894a0e4a801fc3','天杰1',1350138971,1443851956,'192.168.1.30',1,91,1,'1'),(2,1,'天杰2','21232f297a57a5a743894a0e4a801fc3','天杰2',1350138971,1443851956,'192.168.1.30',1,1,1,'1');
+INSERT INTO `duxcmst_ptuser` VALUES (1,1,'天杰1','9f9069a8d8452aa19c9e8a16d12b0480','天杰1',1350138971,1443851956,'192.168.1.30',1,91,1,'1',12),(2,1,'天杰2','21232f297a57a5a743894a0e4a801fc3','天杰2',1350138971,1443851956,'192.168.1.30',1,1,1,'1',4123);
 /*!40000 ALTER TABLE `duxcmst_ptuser` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-03 18:23:43
+-- Dump completed on 2015-10-03 23:35:54
