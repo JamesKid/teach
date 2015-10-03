@@ -41,22 +41,24 @@ class ptuser_memberMod extends commonMod {
         $id=$_GET['id'];
         $this->alert_str($id,'int');
         $this->user_group=model('user_group')->admin_list();
-        $this->info=model('user')->info($id);
+        $this->info=model('ptuser_member')->info($id);
+		//print_r($this->info);die;
         $this->info_group=model('user_group')->info($this->info['gid']);
         $user=model('user')->current_user();
+		//print_r($user);die;
         if($this->info_group['grade']<$user['grade']){
             $this->msg('越权操作！',0);
         }
         $this->action_name='编辑';
         $this->action='edit';
-        $this->show('user/info');
+        $this->show('ptuser_member/info');
     }
 
     //修改资料
     public function edit_info() {
         $id=$_GET['id'];
         $this->alert_str($id,'int');
-        $this->info=model('user')->info($id);
+        $this->info=model('ptuser_member')->info($id);
         $this->info_group=model('user_group')->info($this->info['gid']);
         $user=model('user')->current_user();
         if($this->info_group['grade']<$user['grade']){
@@ -64,7 +66,7 @@ class ptuser_memberMod extends commonMod {
         }
         $this->action_name='编辑';
         $this->action='edit';
-        $this->show('user/edit_info');
+        $this->show('ptuser_member/edit_info');
     }
 
     //用户修改
@@ -81,7 +83,7 @@ class ptuser_memberMod extends commonMod {
                 $this->msg('两次密码输入不同！',0);
                 return;
             }
-            if(model('user')->count($_POST['user'],$_POST['id'])){
+            if(model('ptuser_member')->count($_POST['ptuser_member'],$_POST['id'])){
                 $this->msg('帐号不能重复！',0);
                 return;
             }
@@ -91,7 +93,7 @@ class ptuser_memberMod extends commonMod {
         }
         
         //录入模型处理
-        model('user')->edit($_POST);
+        model('ptuser_member')->edit($_POST);
         $this->msg('用户修改成功! ',1);
     }
 

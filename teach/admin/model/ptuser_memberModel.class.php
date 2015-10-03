@@ -55,7 +55,7 @@ class ptuser_memberModel extends commonModel
     //获取用户内容
     public function info($id)
     {
-        return $this->model->table('admin')->where('id='.$id)->find();
+        return $this->model->table('ptuser')->where('id='.$id)->find();
     }
 
     //检测重复用户
@@ -78,14 +78,14 @@ class ptuser_memberModel extends commonModel
     public function edit($data)
     {
         $condition['id']=intval($data['id']);
-        $id=$this->model->table('admin')->data($data)->where($condition)->update();
+        $id=$this->model->table('ptuser')->data($data)->where($condition)->update();
         return $id;
     }
 
     //删除用户内容
     public function del($id)
     {
-        return $this->model->table('admin')->where('id='.intval($id))->delete(); 
+        return $this->model->table('ptuser')->where('id='.intval($id))->delete(); 
     }
 
 }
