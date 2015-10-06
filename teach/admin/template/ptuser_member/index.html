@@ -9,7 +9,26 @@
    <?php } ?>
    </div>
 </div>
+<style>
+.page {
+	text-align:center;
+	margin-top:3%;
+}
+.page a {
+	border: 1px solid #2d6da2;
+	margin: 2px;
+	padding: 8px;
+}
+.current {
+	border: 1px solid #cccccc;
+	margin: 2px;
+	padding: 8px;
+}
+</style>
 <div class="page_main">
+  <div class="page_menu">
+	  {include file="ptuser_member/index_search"}
+  </div>
   <div class="page_table table_list">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -49,25 +68,27 @@
         &nbsp;&nbsp;<a href="__URL__/edit_info/id-{$vo.id}">修改密码</a>
         <?php } ?>
         <?php if(model('user_group')->model_power('user','del')){ ?>
-        &nbsp;&nbsp;<a href="javascript:void(0);" onclick="del('{$vo.id}',this)">删除</a>
+        &nbsp;&nbsp;<a href="javascript:void(0);" onclick="ndel('{$vo.id}',this)">删除</a>
         <?php } ?>
         </center></td>
       </tr>
       <!--{/foreach}-->
     </table>
+	<div class="page">{$page}</div>
   </div>
 </div>
 
 <div class="page_tool">
-  <div class="page"></div>
+  <div class="page">
+  </div>
 </div>
 <script>
 //删除
-function del(id,obj) {
+function ndel(id,obj) {
 	var obj;
 	ajaxpost({
 		name:'确定要删除此管理员吗？',
-		url:"__URL__/del",
+		url:"__URL__/ndel",
 		data:{id: id},
 		tip:1,
 		success:function(){

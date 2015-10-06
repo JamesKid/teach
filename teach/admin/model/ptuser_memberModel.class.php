@@ -33,23 +33,16 @@ class ptuser_memberModel extends commonModel
     }
 
     //获取用户列表 add by jameskid 2015.10.3  添加平台用户列表查询
-    public function admin_list($type=1)
+    //public function admin_list($type=1,$where)
+    public function admin_list($condition)
     {
-        return $this->model->table('ptuser')->where('type='.$type)->select();
-		/*
-        $user=$this->current_user();
-        if(model('user_group')->model_power('user','current')&&$user['keep']<>1){
-            $where=' AND A.id='.$user['id'];
-        }
-        $data=$this->model->field('A.*,B.name as gname')
-                ->table('admin','A')
-                ->add_table('admin_group','B','A.gid = B.id')
-                ->where('B.grade>='.$user['grade'].$where)
-                ->order('id asc')
-                ->select();
-        return $data;
-		 */
-
+        //return $this->model->table('ptuser')->where($where)->select();
+        $sql="
+            SELECT * from {$this->model->pre}ptuser where {$condition['where']} ORDER BY {$condition['order']} LIMIT {$condition['limit']}
+            ";
+	//	print_r($sql);die;
+        $data=$this->model->query($sql);
+		return $data;
     }
 
     //获取用户内容
@@ -57,21 +50,34 @@ class ptuser_memberModel extends commonModel
     {
         return $this->model->table('ptuser')->where('id='.$id)->find();
     }
+	// 用
+    public function count($condition)
+    {
+        //return $this->model->table('ptuser')->where($where)->select();
+        $sql="
+            SELECT count(1) from {$this->model->pre}ptuser where {$condition['where']}
+            ";
+	//	print_r($sql);die;
+        $data=$this->model->query($sql);
+		return $data[0]['count(1)'];
+    }
 
     //检测重复用户
+	/*
     public function count($user,$id=null)
     {
         if(!empty($id)){
             $where=' AND id<>'.$id;
         }
-        return $this->model->table('admin')->where('user="'.$user.'"'.$where)->count(); 
+        return $this->model->table('ptuser')->where('user="'.$user.'"'.$where)->count(); 
     }
+	 */
 
-    //添加用户内容
+    //添加用户内容 fix by jameskid 2015.10.6 
     public function add($data)
     {
         $_POST['regtime']=time();
-        return $this->model->table('admin')->data($data)->insert();
+        return $this->model->table('ptuser')->data($data)->insert();
     }
 
     //编辑用户内容
@@ -87,7 +93,12 @@ class ptuser_memberModel extends commonModel
     {
         return $this->model->table('ptuser')->where('id='.intval($id))->delete(); 
     }
-
+    public function ndel($id)
+    {
+        // return $this->model->table('ptuser')->where('id='.intval($id))->delete(); 
+        $data['type']=0;
+        $condition['id']=$id;
+        return $this->model->table('ptuser')->data($data)->where($condition)->update();
+    }
 }
-
 ?>
