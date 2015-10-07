@@ -95,6 +95,13 @@ var win = art.dialog.open.origin;
 				'onUploadSuccess' : function(file, json) { 
 					var data=eval('(' + json + ')');
 					$('#{$id}',win.document).val(data.file);
+					// add by jameskid 添加图片后显示图片到页面上 2015.10.7
+					$("#loadImgBox",win.document).show();
+					$("#loadImg",win.document).attr("src","__ROOTURL__"+data.file);
+					/* 
+					imgsrc = $("#loadImg",win.document).attr("src");
+					alert(imgsrc);
+					*/
 					$('#file_id',win.document).val($('#file_id',win.document).val()+data.id+',');
 					<?php if($editor){ ?>
 					win.{$editor}.insertHtml('<img src="'+data.original+'" title="'+data.title+'" alt="'+data.title+'" />');

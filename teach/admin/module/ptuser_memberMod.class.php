@@ -148,7 +148,7 @@ class ptuser_memberMod extends commonMod {
 		$this->show();
 	}
 
-	//用户添加
+	//添加
 	public function add() {
         $this->user_group=model('user_group')->admin_list();
 		$this->action_name='添加';
@@ -164,12 +164,15 @@ class ptuser_memberMod extends commonMod {
         $_POST['regtime']=time();
         $_POST['logintime']=time();
         $_POST['type']=1;
+		/*
         if(model('ptuser_member')->count($_POST['ptuser_member'])){
             $this->msg('帐号不能重复！',0);
             return;
         }
+		 */
         $_POST['password']=md5($_POST['password']);
         //录入模型处理
+		//$this->msg(print_r($_POST));die;
         model('ptuser_member')->add($_POST);
         $this->msg('用户添加成功！',1);
 	}

@@ -44,6 +44,24 @@
       <td width="300"><input name="email" type="text" class="text_value" id="email"  /></td>
       <td></td>
     </tr>
+	 <tr>
+	<td width="100" align="right">用户头像</td>
+	<td colspan="2">
+	  <?php echo module('editor')->get_image_upload_ptuser('image1','image',false,'editor_content') ?>
+	  <input name="image"  type="text" class="text_value" id="image" style="width:220px; float:left" value="{$info.image}"/> 
+	  &nbsp;&nbsp;<input type="button" id="image1" class="button_small" value="选择图片" />
+	  <!--
+	  <input type="button" class="button_small" onclick="get_one_pic()" value="提取第一张图" />
+	  -->
+	</td>
+	</tr>
+	<tr id="loadImgBox" style="display:none">
+      <td width="100" align="right">图片预览</td>
+      <td width="300">
+		  <img width="200px" id="loadImg" src=""/>
+	  </td>
+      <td></td>
+    </tr>
     <?php } ?>
     <tr>
       <td width="100" align="right">状态</td>

@@ -101,6 +101,11 @@ class menuMod extends commonMod
         $this->list=model('menu')->admin_menu(80);
         $this->display();
     }
+    //积分商城管理 add by jameskid 2015.10.6
+    public function pointshop() {
+        $this->list=model('menu')->admin_menu(90);
+        $this->display();
+    }
 
     public function error() {
         $this->success('很抱歉，暂时没有可显示的功能！');

@@ -54,6 +54,11 @@ class menuModel extends commonModel
                 'name'=>'平台用户',
                 'url'=>__APP__.'/menu/ptuser',
                 ),
+            9=>array(
+                'pid'=>90,  //　对应数据库admin_menu 表pid   add by jameskid 2015.10.6
+                'name'=>'积分商城',
+                'url'=>__APP__.'/menu/pointshop',
+                ),
 			);
         $user=model('user')->current_user();
         $menu_power=unserialize($user['menu_power']);

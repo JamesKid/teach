@@ -148,6 +148,23 @@ class editorMod extends commonMod
         ";
         return $html;
     }
+	// 自开发模块图片上传 add by jameskid 2015.10.7
+    public function get_image_upload_ptuser($button,$id,$ajax=false,$editor='') {
+        $html="<script>
+        $(document).ready(function() {
+            $('#".$button."').click(function(){
+                urldialog({
+                    title:'图片上传',
+                    url:'".__APP__."/editor/image_upload?id=".$id."&editor=".$editor."',
+                    width:620,
+                    height:240
+                });
+            });
+        });
+        </script>
+        ";
+        return $html;
+    }
 
     //文件上传
     public function file_upload() {

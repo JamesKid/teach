@@ -30,6 +30,7 @@ class ptuserMod extends commonMod {
             return;
         }
         $_POST['password']=md5($_POST['password']);
+		//$this->msg('test',0);die;
         //录入模型处理
         model('user')->add($_POST);
         $this->msg('用户添加成功！',1);
