@@ -12,7 +12,6 @@ class ptuser_memberMod extends commonMod {
         //排序
 		$where='type=1';
         $sequence=intval($_GET['sequence']);
-		print_r($sequence);
 		if($sequence==0){$sequence=1;}
         switch ($sequence) {
             case '1':
@@ -55,19 +54,25 @@ class ptuser_memberMod extends commonMod {
 
         //状态
         $status=intval($_GET['status']);
+		//if($status==''){$status=3;}
         switch ($status) {
             case '1':
                 $where=$where.' AND status=1';
                 $where_url='1';
                 break;
-            case '2':
+            case '0':
+                $where_url='0';
+                break;
+            case '3':
                 $where=$where.' AND status=0';
-                $where_url='2';
+                $where_url='3';
                 break;
         }
+		/*
         if(!empty($status)){
 			$where_url='-status-'.$where_url;
         }
+		 */
 
         //搜索
         $search=in(urldecode($_GET['search']));
@@ -75,8 +80,8 @@ class ptuser_memberMod extends commonMod {
             $search=auto_charset($search);
         }
         if(!empty($search)){
-        $where=' AND A.title like "%' . $search . '%"';
-        $where_url='-search-'.urlencode($search);
+			$where=$where.' AND concat_ws(user,point,ip,email) like "%' . $search . '%"';
+			$where_url='-search-'.urlencode($search);
         }
 
         //推荐位
@@ -90,6 +95,8 @@ class ptuser_memberMod extends commonMod {
             'where'=>$where,
             'url'=>$where_url,
             'sequence'=>$sequence,
+            'status'=>$status,
+            'search'=>$search,
             );
 
     }
@@ -130,7 +137,7 @@ class ptuser_memberMod extends commonMod {
         //$this->class_info = model('ptuser_member')->info($id);
         //分页信息
         $listRows=20;
-        $url = __URL__ . '/index/page-{page}'.$where['url'].'.html?sequence='.$condition['sequence']; //分页基准网址
+        $url = __URL__ . '/index/page-{page}'.$where['url'].'.html?sequence='.$condition['sequence'].'&status='.$condition['status'].'&search='.$condition['search']; //分页基准网址
         $limit=$this->pagelimit($url,$listRows);
         //内容列表
         //$this->list=model('ptuser_member')->content_list($id,$limit,$where['where'],$where['order']);

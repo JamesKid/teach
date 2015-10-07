@@ -12,10 +12,12 @@
   &nbsp;&nbsp;
   状态：
   <select id="status" onchange="javascript:location.href=this.value;">
-  	<option value="__URL__/index/id-{$class_info.cid}-status-1" <?php if($_GET['status']==1){ ?> selected="selected" <?php } ?> >已启用</option>
-    <option value="__URL__/index/id-{$class_info.cid}-status-2" <?php if($_GET['status']==2){ ?> selected="selected" <?php } ?> >已禁用</option>
+  	<option value="__URL__/index/id-{$class_info.cid}-status-0" <?php if($_GET['status']==0){ ?> selected="selected" <?php } ?> >全部</option>
+  	<option value="__URL__/index/id-{$class_info.cid}-status-1" <?php if($_GET['status']==1){ ?> selected="selected" <?php } ?> >启用</option>
+    <option value="__URL__/index/id-{$class_info.cid}-status-3" <?php if($_GET['status']==3){ ?> selected="selected" <?php } ?> >禁用</option>
   </select>
   &nbsp;&nbsp;
+  <!--
   推荐位：
   <select id="position" onchange="javascript:location.href=this.value;">
   	<option value="__URL__/index/id-{$class_info.cid}">默认</option>
@@ -24,6 +26,7 @@
   <!--{/foreach}-->
   </select>
   &nbsp;&nbsp;
+  -->
   搜索：
   <input style="width:100px" name="search" type="text" class="text_value" id="search" value="<?php echo urldecode($_GET['search']) ?>" />
   &nbsp;&nbsp;<input type="button"  class="button_small" onclick="javascript:location.href='__URL__/index/id-{$class_info.cid}-search-'+$('#search').val();" value="搜索" />
